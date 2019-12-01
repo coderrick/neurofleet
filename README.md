@@ -1,12 +1,9 @@
+<img src="icon.png" height="250" width="250">
 # neurofleet
 Neuro Fleet, application that uses telemetric and eeg data with the kerbspace API to provide real-time management of deliveries.
 
 ## Test coordinates for the entire Borough of Camden
 latlon - 51.517113, -0.220087,51.579361, -0.102606
-
-## Original sample
-# Antioch
-![alt text](icon.png)
 
 ## Installation
 `git clone [this repo]`
