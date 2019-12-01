@@ -24,6 +24,8 @@
     <link rel="stylesheet"
         href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css"
         type="text/css" />
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
   </head>
   <body>
     <!-- Layout Wrapper -->
@@ -70,28 +72,8 @@
       <main class="mdl-layout__content">
         <!-- Persona Card Grid -->
         <div class="persona-card-grid mdl-grid">      
-          <!-- Card 1 -->
-          <div class="persona-card-wide mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title">
-              <h2 class="mdl-card__title-text">Driver Status</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-              <h5>Endpoint #1 <span style="float:right;">100%</span></h5>
-              <h5>Endpoint #2 <span style="float:right;">49%</span></h5>
-              <h5>Endpoint #3 <span style="float:right;">31%</span></h5>
-            </div>
-            <div class="mdl-card__supporting-text">
-              <p>Parking violations <span style="float:right;">8</span></p>
-              <p>Distance<span style="float:right;">20</span></p>
-              <p>Fleet ID <span style="float:right;">3</span></p>
-            </div>
-            <div class="mdl-card__menu">
-              <button id="demo-menu-lower-left"
-                      class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">more_vert</i>
-              </button>
-            </div>
-          </div><!-- /Card -->
+         
+            
           
          
           
@@ -109,6 +91,7 @@
         .demo-card-wide.mdl-card {
           /* width: 512px; */
           margin-right: 10px;
+          margin-left: 10px;
           flex: 1 0 0;
         }
         .demo-card-wide > .mdl-card__title {
@@ -153,6 +136,46 @@
 
       </main><!-- /Content --> 
     </div><!-- /Layout Wrapper -->
-    <script src="map.js"></script>
+    <script >
+        mapboxgl.accessToken =
+  "pk.eyJ1IjoidHNxdWlyZTUiLCJhIjoiY2pvanRudmRpMDB0aTNrbnk3NXpyc205ayJ9.VebVhb0D-yXiqv8ZVMCI0Q";
+
+var map = new mapboxgl.Map({
+  container: "map", // container id
+  style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+  center: [-0.1833427, 51.555543], // starting position [lng, lat]
+  zoom: 16
+});
+
+map.on("load", function() {
+  fetch(
+    "https://fordkerbhack.azure-api.net/features?viewport=51.5535663,-0.1887717,51.5589623,-0.1788357",
+    {
+      headers: {
+        "Ocp-Apim-Subscription-Key": "ae206fa2084e474f8b46cc28443c0680"
+      }
+    }
+  )
+    .then(response => response.json())
+    .then(curbLR => {
+      map.addLayer({
+        id: "bays",
+        type: "line",
+        source: {
+          type: "geojson",
+          data: curbLR
+        },
+        layout: {
+          "line-join": "round",
+          "line-cap": "round"
+        },
+        paint: {
+          "line-color": "blue",
+          "line-width": 8
+        }
+      });
+    });
+});
+    </script>
   </body>
 </html>
