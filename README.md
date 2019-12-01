@@ -1,5 +1,6 @@
 <img src="icon.png" height="250" width="250">
-# neurofleet
+
+# Neuro Fleet
 Neuro Fleet, application that uses telemetric and eeg data with the kerbspace API to provide real-time management of deliveries.
 
 ## Test coordinates for the entire Borough of Camden
