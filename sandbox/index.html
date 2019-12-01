@@ -1,12 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Neuro Fleet</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Add mapbox plugins! -->
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css"
+        type="text/css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <main>
+        <div id="map"></div>
+    </main>
+    <script src="map.js"></script>
+    <!-- Kerbspace API test -->
+    <script>
+        console.log('REQUEST:');
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://fordkerbhack.azure-api.net/features?viewport=51.536393751918915,-0.1412890195847183,51.5397303909963,-0.13700821399694973",
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Ocp-Apim-Subscription-Key": "ae206fa2084e474f8b46cc28443c0680",
+                //"User-Agent": "PostmanRuntime/7.20.1",
+                "Cache-Control": "no-cache",
+                "Postman-Token": "a6b32de1-72e0-4cd5-bf24-fdfb026ae148,5df552b1-0ebf-4278-9c8e-3854b77a39ee",
+                //"Host": "fordkerbhack.azure-api.net",
+                //"Accept-Encoding": "gzip, deflate",
+                //"Connection": "keep-alive",
+                "cache-control": "no-cache"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    </script>
 </body>
+
 </html>
